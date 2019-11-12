@@ -71,7 +71,9 @@ def scrape():
         
         nrow=int(len(to_df)/len(columns))
         df=pd.DataFrame(np.array(to_df).reshape(nrow,3),columns=columns)
-        df[['gross', 'worldwide-gross']]=df[['gross', 'worldwide-gross']].applymap(lambda x:convdollar(x))
+        df = df[['title', 'worldwide-gross']]
+        df['year'] = year
+        df[['worldwide-gross']]=df[['worldwide-gross']].applymap(lambda x:convdollar(x))
         df_list.append(df)
 
     main=pd.concat(df_list)
